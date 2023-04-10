@@ -1,0 +1,28 @@
+.registerPage{
+    display: grid;
+    grid-template-columns: auto auto;
+    width: 70%;
+    padding: 3% 15%;
+}
+.describe{
+    margin-top: 35%;
+}
+.describe p{
+    font-size: 50px;
+    font-weight: 600;
+    color: teal;
+}
+.register{
+    text-align: center;
+    background-color: rgb(242, 246, 250);
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.mat-mdc-raised-button.mat-unthemed{
+    margin: 8px 0;
+    width: 100%;
+    background-color: teal;
+    color: white;
+}
+mat-form-field{
+    width: 100%;
+}

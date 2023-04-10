@@ -1,0 +1,19 @@
+.spacer{
+    flex: 1 1 auto;
+}
+[class^=fa]{
+    font-size: 20px;
+}
+mat-toolbar{
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    background-color:teal;
+    position:sticky;
+    color: white;
+}
+.menu span{
+    font-size: 28px;
+}
+.menu a{
+    margin: 0 7px;
+}
+

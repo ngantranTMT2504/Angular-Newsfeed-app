@@ -1,0 +1,13 @@
+<div class="avatar">
+    <div class="avatar-container">
+        <img [src]="imgsrc" alt="avatar">
+        <button id="btn-change-avt" mat-icon-button (click)="fileUpload.click()">
+            <mat-icon>camera_enhance</mat-icon>
+        </button>
+        <form (formGroup)="formAvatar">
+            <input id="input-avatar" formControlName="avatar" #fileUpload type="file" (change)="upload($event)"><br>
+        </form>
+        <button mat-raised-button type="submit" (click)="uploadImg()">update</button>
+    </div>
+</div>
+    

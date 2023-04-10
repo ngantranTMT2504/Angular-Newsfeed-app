@@ -1,0 +1,33 @@
+<div class="loginPage">
+    <div class="describe">
+        <p>Newsfeed</p>
+        <h3>Newsfeed helps you share with the people in your life.</h3>
+    </div>
+    <div>
+        <mat-card class="login">
+            <mat-card-content>
+                <form [formGroup]="loginForm" (ngSubmit)="login()">
+                    <div>
+                        <mat-form-field appearance="outline">
+                            <mat-label>User Name:</mat-label>
+                            <input matInput formControlName="userName" placeholder="John123">
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Password </mat-label>
+                            <input matInput type="password" passwordToggle formControlName="password">
+                        </mat-form-field>
+                    </div>
+                    <div class="btn">
+                        <button mat-raised-button class="btnlogin" type="submit">Log In</button><br>
+                        <a class="fp" href="" >Forgotten password?</a><hr>
+                        <a mat-raised-button routerLink="/register">Create New Account</a>
+                    </div>
+                </form>
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+</div>
+

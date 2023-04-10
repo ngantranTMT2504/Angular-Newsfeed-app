@@ -1,0 +1,15 @@
+<div class="homePage">
+    <div class="news">
+        <div class="add-news">
+            <mat-card class="add">
+                <mat-card-content>
+                        <img [src]="avatarUrl" alt="avatar">
+                        <form (formGroup)="formAddNews">
+                            <input matInput type="text" formControlName="status" placeholder=" How is your day?">
+                        </form>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+    <div class="comment"></div>
+</div>

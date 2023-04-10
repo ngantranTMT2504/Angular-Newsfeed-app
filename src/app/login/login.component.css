@@ -1,0 +1,33 @@
+.loginPage{
+    display: grid;
+    grid-template-columns: auto auto;
+    width: 70%;
+    padding: 8% 15%;
+}
+.describe p{
+    font-size: 50px;
+    font-weight: 600;
+    color: teal;
+    margin-top: 20%;
+}
+.mat-mdc-raised-button:not(:disabled){
+    background-color:teal;
+    color: white;
+}
+.login{
+    text-align: center;
+    background-color: rgb(242, 246, 250);
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.login a, button{
+    margin: 8px 0;
+    width: 100%;
+}
+.fp{
+    text-decoration: none;
+    color: teal;
+}
+
+mat-form-field{
+    width: 100%;
+}
