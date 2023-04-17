@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../service/auth.service';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { CreateNewsComponent } from './share/create-news/create-news.component';
+import { getFirestore, doc, getDoc, getDocs, collection} from 'firebase/firestore';
+import { user } from './user.models';
 
 @Component({
   selector: 'app-home',
@@ -10,29 +13,40 @@ import { AuthService } from '../service/auth.service';
 })
 export class HomeComponent implements OnInit{
   formAddNews?: FormGroup;
-  avatarUrl?: string;
-  userName!:string;
+  avatarUrl?: any;
+  userName = sessionStorage.getItem('userName') || '';
+  posts?:object[];
   constructor(
     private fb : FormBuilder,
     private store : AngularFirestore,
-    private auth : AuthService
-  ) {
-    this.auth.userName.subscribe((name) => {
-      this.userName = name;
-    });
-    this.getAvatarUrl();
+    private dialog : MatDialog,
+    ) {
+      this.getAvatar();
+      this.getPost();
   }
   ngOnInit() {
-    this.formAddNews = this.fb.group({
-      userName: this.fb.control(sessionStorage.getItem('user')),
-      status: this.fb.control('', Validators.required)
+    this.formAddNews = new FormGroup({
+      status: new FormControl('', Validators.required)
     });
+    
   }
-  
-  getAvatarUrl(){
+  getAvatar(){
     this.store.collection('users').doc(this.userName).get().subscribe((res) => {
-      const url = res.get('avatar.avatar');
-      this.avatarUrl = url;
+      this.avatarUrl = res.get('avatar.avatar');
+   })
+  }
+  createNews(){
+    this.dialog.open(CreateNewsComponent)
+  }
+  getPost(){
+    this.store.collection('post').get().subscribe(res => {
+      res.forEach((doc) => {
+        this.store.collection('post').doc(doc.id).get().subscribe(res => {
+        })
+       })
+       console.log(this.posts)
     })
   }
 }
+    
+

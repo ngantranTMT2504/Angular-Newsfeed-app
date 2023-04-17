@@ -1,11 +1,11 @@
 export const environment = {
     production: false,
     firebase: {
-        apiKey: "AIzaSyDP1h4isW6iI8JgxINxCPVi7MZZVng76Ng",
-        authDomain: "newsfeed-app-3ff48.firebaseapp.com",
-        projectId: "newsfeed-app-3ff48",
-        storageBucket: "newsfeed-app-3ff48.appspot.com",
-        messagingSenderId: "732788459900",
-        appId: "1:732788459900:web:7ea534dbeceb380e79bcf9"
+        apiKey: "AIzaSyDmrr7vi_gLqnZsAMek-jY-OKWUHjzrrXY",
+        authDomain: "angular-newsfeed-48667.firebaseapp.com",
+        projectId: "angular-newsfeed-48667",
+        storageBucket: "angular-newsfeed-48667.appspot.com",
+        messagingSenderId: "385685042238",
+        appId: "1:385685042238:web:3e6bcd51eecf3c32bccd6f"
     }
 };

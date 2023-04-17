@@ -4,7 +4,7 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs';
-import { AuthService } from '../service/auth.service';
+
 @Component({
   selector: 'app-set-avatar',
   templateUrl: './set-avatar.component.html',
@@ -12,28 +12,22 @@ import { AuthService } from '../service/auth.service';
 })
 export class SetAvatarComponent implements OnInit {
   imgsrc: string = 'assets/images/avt-icon.png';
-  selectImg: any = 'assets/images/avt-icon.png';
+  selectImg: any;
   formAvatar!: FormGroup;
-  userName!: string; 
+  userName = sessionStorage.getItem('userName') || '';
 
   constructor(
     private storage: AngularFireStorage,
     private route: Router,
     private store: AngularFirestore,
-    private auth : AuthService
-  ) {
-  }
+  ) {}
   
   ngOnInit() {
     this.formAvatar = new FormGroup({
-      avatar: new FormControl('')
+      avatar: new FormControl(null)
     });
-    this.auth.userName.subscribe((name) => {
-      console.log(name)
-      this.userName = name;
-    })
   }
-  
+
   upload(event: any) {
     if (event.target.files[0] && event.target.files) {
       const reader = new FileReader();
@@ -46,18 +40,22 @@ export class SetAvatarComponent implements OnInit {
     }
   }
   uploadImg() {
-    var filePath = `avatar:${this.userName}/${this.selectImg.name}_${new Date().getTime()}`;
+    var filePath = `avatar:${this.userName}/${this.selectImg}_${new Date().getTime()}`;
     const fileRef = this.storage.ref(filePath);
+    debugger
     this.storage.upload(filePath, this.selectImg).snapshotChanges().pipe(
       finalize(() => {
         fileRef.getDownloadURL().subscribe((url) => {
           this.formAvatar.value.avatar = url;
+          debugger
           this.store.collection('users').doc(this.userName).update({
             avatar: this.formAvatar.value
           });
+          debugger
         })
       })
     ).subscribe();
+    this.formAvatar.reset();
     this.route.navigate(['home']);
   }
 }

@@ -1,25 +1,71 @@
 .homePage{
     width: 70%;
+    height: auto;
     margin: 0 15%;
     display: grid;
     grid-template-columns: 60% 40%;
-    gap: 2px;
+    gap: 5px;
 }
-.add img{
-    width:50px; 
-    height:50px;
+.add-news{
+    display: grid;
+    grid-template-rows: auto auto;
+    gap: 5px;
+}
+.avt{
+    width:2.8rem; 
+    height:2.8rem;
     border-radius: 50%;
-    margin: 0 20px;
+    margin-right: 1em ;
+    object-fit: cover;
+    object-position: center;
 }
 .add mat-card-content{
     display: flex;
-    margin: 5px 20px;
 }
 .add input{
-    width: 250px;
-    height: 30px;
+    width: 30vw;
+    height:2.8vw;
     border: 1px solid black;
-    border-radius: 30px;
-    margin: 10px 0;
+    border-radius: 6vh;
+    margin-top: 2px;
+    padding-left: 10px;
 }
-
+.news, .add{
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.img-post{
+    width: 80%;
+    height: 32vh;
+    object-fit: cover;
+    object-position: center;
+}
+.avatar-icon{
+    display: flex;
+    font-size: 14px;
+}
+#news{
+    margin: 1rem 2rem;
+}
+.news mat-card-actions{
+    border-top: 1px solid rgba(0, 0, 0, 0.37) ;
+}
+.news button{
+    flex: 1 1 auto;
+}
+.comment{
+    height: auto;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    padding: 1rem;
+    font-size: 13px;
+    display: block;
+}
+.comment .card-comment{
+    display: flex;
+}
+#cmt{
+    display: block;
+    padding: 1px 1.2rem;
+    background-color: rgba(0, 0, 0, 0.162);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.37) ;
+    border-radius: 1rem
+}

@@ -1,15 +1,47 @@
 <div class="homePage">
-    <div class="news">
-        <div class="add-news">
-            <mat-card class="add">
-                <mat-card-content>
-                        <img [src]="avatarUrl" alt="avatar">
-                        <form (formGroup)="formAddNews">
-                            <input matInput type="text" formControlName="status" placeholder=" How is your day?">
-                        </form>
-                </mat-card-content>
-            </mat-card>
-        </div>
+    <div class="add-news">
+        <mat-card class="add">
+            <mat-card-content>
+                <img *ngIf="avatarUrl" class="avt" [src]="avatarUrl" alt="avatar">
+                <form>
+                    <input matInput type="text" placeholder=" Hello! How is your day?" (click)="createNews()">
+                </form><br>
+            </mat-card-content>
+        </mat-card>
+        <mat-card class="news">
+            <mat-card-content>
+                <div class="avatar-icon">
+                    <img class="avt" [src]="avatarUrl">
+                    <div>
+                        <p class="userName">{{userName}}</p>
+                        <p>time</p>
+                    </div>
+                </div>
+                <div id="news">
+                    <p>status</p>
+                    <img class="img-post" src="assets/images/image1.jpg" alt="">
+                </div>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-icon-button>
+                    <mat-icon>favorite_border</mat-icon>
+                </button>
+                <button mat-icon-button>
+                    <mat-icon>question_answer</mat-icon>
+                </button>
+                <button mat-icon-button>
+                    <mat-icon>share</mat-icon>
+                </button>
+            </mat-card-actions>
+        </mat-card>
     </div>
-    <div class="comment"></div>
+    <div class="comment">
+        <div class="card-comment">
+            <img [src]="avatarUrl" alt="" class="avt">
+            <div id="cmt">
+                <p>{{userName}}</p>
+                <p>I'm displaying an image. hkjjnnnmm.,m,mlkl;jjkjklk</p>
+            </div>
+        </div>
+</div>
 </div>

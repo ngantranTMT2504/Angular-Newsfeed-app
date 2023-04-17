@@ -13,11 +13,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { environment } from "src/environments/environment";
 import { AngularFireModule} from "@angular/fire/compat";
 import { AngularFirestoreModule} from "@angular/fire/compat/firestore";
-import { AuthService } from './service/auth.service';
 import { SetAvatarComponent } from './set-avatar/set-avatar.component';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
-import { EncryptDecryptService } from './service/encrypt-decrypt.service';
-
+import { EncryptDecryptService, EncryptDecryptServiceInstance } from './service/encrypt-decrypt.service';
+import { NewsFeedFunction, NewsFeedFunctionInstance } from './service/news-feed-function.service';
+import { CreateNewsComponent } from './home/share/create-news/create-news.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +26,7 @@ import { EncryptDecryptService } from './service/encrypt-decrypt.service';
     RegisterComponent,
     LoginComponent,
     SetAvatarComponent,
+    CreateNewsComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,7 +41,16 @@ import { EncryptDecryptService } from './service/encrypt-decrypt.service';
     AngularFirestoreModule,
     AngularFireStorageModule,
   ],
-  providers: [AuthService, EncryptDecryptService],
+  providers: [EncryptDecryptService,
+    {
+      provide:EncryptDecryptServiceInstance,
+      useValue: new EncryptDecryptService(),
+    }
+    // {
+    // provide: NewsFeedFunctionInstance,
+    // useValue: new NewsFeedFunction(),
+    // }
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

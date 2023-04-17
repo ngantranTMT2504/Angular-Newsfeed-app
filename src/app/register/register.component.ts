@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { EncryptDecryptService } from '../service/encrypt-decrypt.service';
+import { EncryptDecryptService, EncryptDecryptServiceInstance } from '../service/encrypt-decrypt.service';
 
 @Component({
   selector: 'app-register',
@@ -13,18 +13,17 @@ import { EncryptDecryptService } from '../service/encrypt-decrypt.service';
 export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
   constructor(
-    private fb: FormBuilder,
     private toastr: ToastrService,
     private route: Router,
     private store: AngularFirestore,
-    private crypt: EncryptDecryptService
+    @Inject(EncryptDecryptServiceInstance) private crypt : EncryptDecryptService
   ) { };
   ngOnInit(): void {
-    this.registerForm = this.fb.group({
-      userName: this.fb.control('', Validators.compose([Validators.required, Validators.minLength(5)])),
-      fullname: this.fb.control('', Validators.required),
-      password: this.fb.control('', Validators.required),
-      email: this.fb.control('', Validators.compose([Validators.required, Validators.email])),
+    this.registerForm = new FormGroup({
+      userName: new FormControl('', Validators.compose([Validators.required, Validators.minLength(5)])),
+      fullname: new FormControl('', Validators.required),
+      password: new FormControl('', Validators.required),
+      email: new FormControl('', Validators.compose([Validators.required, Validators.email])),
     })
   };
   register() {
