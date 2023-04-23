@@ -29,11 +29,14 @@ export class RegisterComponent implements OnInit {
   register() {
     this.registerForm.value.password = this.crypt.encrypt(this.registerForm.value.password)
     if(this.registerForm.valid){
-        this.toastr.success('Registeration successfully');
-        this.route.navigate(['/login']);
-        this.store.collection('users').doc(this.registerForm.value.userName).set({
-          info: this.registerForm.value
-        });
+      this.store.collection('users').doc(this.registerForm.value.userName).set({
+        info: this.registerForm.value,
+        avatar: {
+          avatar : "assets/images/avt-icon.png"
+        }
+      });
+      this.toastr.success('Registeration successfully');
+      this.route.navigate(['/login']);
       } else{
       this.toastr.error('You must inter information valid', 'Your information wrong');
     }

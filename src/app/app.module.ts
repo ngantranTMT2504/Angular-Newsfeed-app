@@ -18,6 +18,12 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { EncryptDecryptService, EncryptDecryptServiceInstance } from './service/encrypt-decrypt.service';
 import { NewsFeedFunction, NewsFeedFunctionInstance } from './service/news-feed-function.service';
 import { CreateNewsComponent } from './home/share/create-news/create-news.component';
+import { CommentComponent } from './home/share/comment/comment.component';
+import { provideFirestore } from '@angular/fire/firestore';
+import { getFirestore } from 'firebase/firestore';
+import { provideFirebaseApp } from '@angular/fire/app';
+import { initializeApp } from 'firebase/app';
+import { FriendsComponent } from './home/share/friends/friends.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +33,8 @@ import { CreateNewsComponent } from './home/share/create-news/create-news.compon
     LoginComponent,
     SetAvatarComponent,
     CreateNewsComponent,
+    CommentComponent,
+    FriendsComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,6 +46,8 @@ import { CreateNewsComponent } from './home/share/create-news/create-news.compon
     ToastrModule.forRoot(),
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideFirestore(() => getFirestore()),
     AngularFirestoreModule,
     AngularFireStorageModule,
   ],

@@ -12,7 +12,6 @@ import { EncryptDecryptService, EncryptDecryptServiceInstance } from '../service
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
-  
   constructor(
     private toastr: ToastrService,
     private route: Router,

@@ -11,23 +11,20 @@ import { finalize } from 'rxjs';
   styleUrls: ['./set-avatar.component.css']
 })
 export class SetAvatarComponent implements OnInit {
-  imgsrc: string = 'assets/images/avt-icon.png';
   selectImg: any;
   formAvatar!: FormGroup;
   userName = sessionStorage.getItem('userName') || '';
-
+  imgsrc: string = 'assets/images/avt-icon.png'
   constructor(
     private storage: AngularFireStorage,
     private route: Router,
     private store: AngularFirestore,
   ) {}
-  
   ngOnInit() {
     this.formAvatar = new FormGroup({
       avatar: new FormControl(null)
     });
   }
-
   upload(event: any) {
     if (event.target.files[0] && event.target.files) {
       const reader = new FileReader();
@@ -42,16 +39,13 @@ export class SetAvatarComponent implements OnInit {
   uploadImg() {
     var filePath = `avatar:${this.userName}/${this.selectImg}_${new Date().getTime()}`;
     const fileRef = this.storage.ref(filePath);
-    debugger
     this.storage.upload(filePath, this.selectImg).snapshotChanges().pipe(
       finalize(() => {
         fileRef.getDownloadURL().subscribe((url) => {
           this.formAvatar.value.avatar = url;
-          debugger
           this.store.collection('users').doc(this.userName).update({
             avatar: this.formAvatar.value
           });
-          debugger
         })
       })
     ).subscribe();

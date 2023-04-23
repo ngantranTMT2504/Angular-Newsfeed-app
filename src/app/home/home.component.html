@@ -8,40 +8,34 @@
                 </form><br>
             </mat-card-content>
         </mat-card>
-        <mat-card class="news">
+        <mat-card class="news" *ngFor="let post of posts">
             <mat-card-content>
                 <div class="avatar-icon">
-                    <img class="avt" [src]="avatarUrl">
+                    <img class="avt" [src]="post.creatorAvatar">
                     <div>
-                        <p class="userName">{{userName}}</p>
-                        <p>time</p>
+                        <p class="userName">{{post.creatorName}}</p>
+                        <span class="time">{{(post.time | date:"short")}}</span>
                     </div>
                 </div>
                 <div id="news">
-                    <p>status</p>
-                    <img class="img-post" src="assets/images/image1.jpg" alt="">
+                    <p>{{post.content}}</p>
+                    <img class="img-post" [src]="post.image" alt="">
                 </div>
             </mat-card-content>
             <mat-card-actions>
                 <button mat-icon-button>
                     <mat-icon>favorite_border</mat-icon>
                 </button>
-                <button mat-icon-button>
+                <button mat-icon-button (click)="openComment(post.id)">
                     <mat-icon>question_answer</mat-icon>
                 </button>
                 <button mat-icon-button>
                     <mat-icon>share</mat-icon>
                 </button>
             </mat-card-actions>
-        </mat-card>
+        </mat-card> 
     </div>
-    <div class="comment">
-        <div class="card-comment">
-            <img [src]="avatarUrl" alt="" class="avt">
-            <div id="cmt">
-                <p>{{userName}}</p>
-                <p>I'm displaying an image. hkjjnnnmm.,m,mlkl;jjkjklk</p>
-            </div>
-        </div>
-</div>
+    <div>
+    </div>
+    
 </div>

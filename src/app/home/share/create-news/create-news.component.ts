@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { FormControl, FormGroup} from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { finalize } from 'rxjs';
+import { FirestoreService } from 'src/app/service/firestore.service';
 
 @Component({
   selector: 'app-create-news',
@@ -15,12 +16,13 @@ export class CreateNewsComponent implements OnInit {
   selectImg: any;
   formStatus!: FormGroup;
   userName = sessionStorage.getItem('userName') || '';
+  // posts?: posts["post"]
   constructor(
     private store: AngularFirestore,
     private storage: AngularFireStorage,
-    private dialog: MatDialog
-  ) {}
-
+    private dialog: MatDialog,
+    private firestoreService: FirestoreService
+  ) { }
   ngOnInit(): void {
     this.formStatus = new FormGroup({
       image: new FormControl('')
@@ -38,27 +40,30 @@ export class CreateNewsComponent implements OnInit {
     }
   }
   postNews(status: HTMLTextAreaElement) {
+    let post: {"content":string,"image": string,"creatorName": string,"creatorAvatar": string,"time": number, "comment": []}
     var filePath = `post:${this.userName}/${this.selectImg}_${new Date().getTime()}`;
     const fileRef = this.storage.ref(filePath);
     this.store.collection('users').doc(this.userName).get().subscribe((avt) => {
       this.storage.upload(filePath, this.selectImg).snapshotChanges().pipe(
         finalize(() => {
           fileRef.getDownloadURL().subscribe((res) => {
-            this.store.collection('post').add({
-              post : {
-                creatorId: this.userName,
-                avatar: avt.get('avatar.avatar'),
-                content: status.value,
-                image: res,
-                timestamp: new Date().getTime()
-              }
-            });
+            post = { 
+              "content": status.value,
+              "image": res,
+              "creatorName": this.userName,
+              "creatorAvatar": avt.get('avatar.avatar'),
+              "time": new Date().getTime(),
+              "comment": []
+            }
+            this.firestoreService.setPost(post)
           })
         })
-      ).subscribe();
-      this.dialog.closeAll()
-   })
-  }
-
+    ).subscribe()
+  })
+  this.dialog.closeAll();
 }
 
+setComment(){
+  
+}
+}

@@ -34,8 +34,8 @@
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 .img-post{
-    width: 80%;
-    height: 32vh;
+    width: 100%;
+    height: 40vh;
     object-fit: cover;
     object-position: center;
 }
@@ -50,7 +50,12 @@
     border-top: 1px solid rgba(0, 0, 0, 0.37) ;
 }
 .news button{
-    flex: 1 1 auto;
+   margin:0px 3.5rem;
+}
+.time{
+    color: teal;
+    font-size: 12px;
+    font-style: italic;
 }
 .comment{
     height: auto;
@@ -68,4 +73,24 @@
     background-color: rgba(0, 0, 0, 0.162);
     border-bottom: 1px solid rgba(0, 0, 0, 0.37) ;
     border-radius: 1rem
+}
+.createCmt{
+    display:inline-flex;
+    position: fixed;
+    bottom: 10px;
+    padding: 5px 0;
+}
+.createCmt input{
+    width: 15vw;
+    height:2.8vw;
+    border: 1px solid black;
+    border-radius: 6vh;
+    margin-top: 2px;
+    padding-left: 12px;
+}
+.createCmt button{
+    margin: 0 1rem;
+}
+.createCmt mat-icon{
+    color: teal;
 }
