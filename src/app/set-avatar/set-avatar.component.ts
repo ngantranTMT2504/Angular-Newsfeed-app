@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore'
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { finalize } from 'rxjs';
 
 @Component({
@@ -19,6 +20,7 @@ export class SetAvatarComponent implements OnInit {
     private storage: AngularFireStorage,
     private route: Router,
     private store: AngularFirestore,
+    private toastr : ToastrService
   ) {}
   ngOnInit() {
     this.formAvatar = new FormGroup({
@@ -49,7 +51,9 @@ export class SetAvatarComponent implements OnInit {
         })
       })
     ).subscribe();
+    this.toastr.success('Your avatar was changed', 'Changed avatar successfully')
     this.formAvatar.reset();
     this.route.navigate(['home']);
   }
 }
+

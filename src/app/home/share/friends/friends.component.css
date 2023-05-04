@@ -1,0 +1,38 @@
+h2{
+    margin: 1rem 10rem;
+}
+.friend{
+    display: grid;
+    grid-template-columns: auto 50% auto;
+    margin: 0 0 0 2em;
+    padding: 0.3rem 0.2rem;
+    width: 25vw;
+    border-radius: 0.5rem;
+}
+.friend:hover{
+    background-color: rgba(128, 128, 128, 0.3);
+}
+.avt{
+    width:2rem; 
+    height:2rem;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+    margin: 0.25rem 1rem 0.25rem 0;
+    border: 1px solid;
+}
+.name{
+    margin: 0.5rem 0;
+    font-weight: 500;
+}
+.icon{
+    right: 0;
+}
+mat-icon{
+    margin: 0.37rem 5px;
+    transition: 0.3s;
+}
+mat-icon:hover{
+    color: teal;
+    transform:scale(1.2);
+}

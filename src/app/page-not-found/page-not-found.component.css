@@ -1,0 +1,21 @@
+.mainPage{
+    display: grid;
+    grid-template-columns:auto auto;
+    gap: 1rem;
+    padding: 15% 30%;
+    text-align: center;
+    align-items: center;
+}
+.mainPage h1{
+    font-size: 5rem;
+    text-shadow: rgb(0, 140, 255) 1px 0 10px;
+    border-right: 1px solid;
+}
+.mainPage h3{
+    font-size: 2rem;
+    line-height: 1.5;
+}
+.mainPage a{
+    background-color: teal;
+    color: white;
+}

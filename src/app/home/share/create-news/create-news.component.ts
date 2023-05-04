@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { ToastrService } from 'ngx-toastr';
 import { finalize } from 'rxjs';
 import { FirestoreService } from 'src/app/service/firestore.service';
 
@@ -15,13 +16,13 @@ export class CreateNewsComponent implements OnInit {
   imageUrl: any;
   selectImg: any;
   formStatus!: FormGroup;
-  userName = sessionStorage.getItem('userName') || '';
-  // posts?: posts["post"]
+  
   constructor(
     private store: AngularFirestore,
     private storage: AngularFireStorage,
     private dialog: MatDialog,
-    private firestoreService: FirestoreService
+    private firestoreService: FirestoreService,
+    private toastr: ToastrService,
   ) { }
   ngOnInit(): void {
     this.formStatus = new FormGroup({
@@ -40,17 +41,24 @@ export class CreateNewsComponent implements OnInit {
     }
   }
   postNews(status: HTMLTextAreaElement) {
-    let post: {"content":string,"image": string,"creatorName": string,"creatorAvatar": string,"time": number, "comment": []}
-    var filePath = `post:${this.userName}/${this.selectImg}_${new Date().getTime()}`;
+    let post: {
+      "content": string,
+      "image": string,
+      "creatorName": string,
+      "creatorAvatar": string,
+      "time": number,
+      "comment": []
+    }
+    var filePath = `post:${this.firestoreService.userName}/${this.selectImg}_${new Date().getTime()}`;
     const fileRef = this.storage.ref(filePath);
-    this.store.collection('users').doc(this.userName).get().subscribe((avt) => {
+    this.store.collection('users').doc(this.firestoreService.userName).get().subscribe((avt) => {
       this.storage.upload(filePath, this.selectImg).snapshotChanges().pipe(
         finalize(() => {
           fileRef.getDownloadURL().subscribe((res) => {
-            post = { 
+            post = {
               "content": status.value,
               "image": res,
-              "creatorName": this.userName,
+              "creatorName": this.firestoreService.userName,
               "creatorAvatar": avt.get('avatar.avatar'),
               "time": new Date().getTime(),
               "comment": []
@@ -58,12 +66,9 @@ export class CreateNewsComponent implements OnInit {
             this.firestoreService.setPost(post)
           })
         })
-    ).subscribe()
-  })
-  this.dialog.closeAll();
-}
-
-setComment(){
-  
-}
+      ).subscribe()
+    })
+    this.toastr.success('You was post 1 news!');
+    this.dialog.closeAll();
+  }
 }

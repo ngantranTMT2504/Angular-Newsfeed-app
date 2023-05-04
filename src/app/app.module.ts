@@ -24,6 +24,8 @@ import { getFirestore } from 'firebase/firestore';
 import { provideFirebaseApp } from '@angular/fire/app';
 import { initializeApp } from 'firebase/app';
 import { FriendsComponent } from './home/share/friends/friends.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { SpinnerComponent } from './spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,8 @@ import { FriendsComponent } from './home/share/friends/friends.component';
     CreateNewsComponent,
     CommentComponent,
     FriendsComponent,
+    PageNotFoundComponent,
+    SpinnerComponent,
   ],
   imports: [
     BrowserModule,

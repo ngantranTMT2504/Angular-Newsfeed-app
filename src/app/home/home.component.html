@@ -1,4 +1,5 @@
-<div class="homePage">
+<app-spinner *ngIf="disable"></app-spinner>
+<div class="homePage" *ngIf="!disable">
     <div class="add-news">
         <mat-card class="add">
             <mat-card-content>
@@ -13,7 +14,7 @@
                 <div class="avatar-icon">
                     <img class="avt" [src]="post.creatorAvatar">
                     <div>
-                        <p class="userName">{{post.creatorName}}</p>
+                        <h4 class="userName">{{post.creatorName}}</h4>
                         <span class="time">{{(post.time | date:"short")}}</span>
                     </div>
                 </div>
@@ -35,7 +36,7 @@
             </mat-card-actions>
         </mat-card> 
     </div>
-    <div>
+    <div class="friends">
+        <app-friends></app-friends>
     </div>
-    
 </div>

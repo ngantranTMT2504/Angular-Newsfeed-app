@@ -12,7 +12,7 @@ export class FirestoreService {
   
   constructor(private store: AngularFirestore, private firestore : Firestore) { }
   setPost(post?: posts["post"]) {
-    const postNews = this.store.collection('post').add(post);
+    this.store.collection('post').add(post);
   }
   getDocId(){
     this.store.collection('post').snapshotChanges().pipe(map( post => post.map(a => {

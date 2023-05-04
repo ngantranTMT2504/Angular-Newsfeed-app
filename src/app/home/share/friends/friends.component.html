@@ -1,4 +1,9 @@
-<div class="friend">
-    <img src="" alt="">
-    <p></p>
+<h2>Friends</h2>
+<div class="friend" *ngFor="let friend of friends">
+    <img [src]="friend.avatar" alt="" class="avt">
+    <h4 class="name">{{friend.name}}</h4>
+    <div class="icon">
+        <mat-icon>local_phone</mat-icon>
+        <mat-icon>local_post_office</mat-icon>
+    </div>
 </div>

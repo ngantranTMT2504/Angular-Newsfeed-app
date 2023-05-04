@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, DoCheck } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -13,7 +13,6 @@ import { FirestoreService } from 'src/app/service/firestore.service';
 export class CommentComponent implements OnInit{
   formComment!: FormGroup;
   avatarUrl?: any;
-  userName = sessionStorage.getItem('userName') || '';
   id?: string
   comments: any;
   constructor(
@@ -24,7 +23,7 @@ export class CommentComponent implements OnInit{
     @Inject(MAT_DIALOG_DATA) public data: any
     ) {
     this.id = data
-    this.getAvatar(this.userName);
+    this.getAvatar(this.firestoreService.userName);
     this.getComment(this.id)
   }
   ngOnInit(): void {
@@ -32,6 +31,7 @@ export class CommentComponent implements OnInit{
       comment : new FormControl('')
     })
   }
+
   getAvatar(userId: string) {
     this.store.collection('users').doc(userId).get().subscribe((res) => {
       this.avatarUrl= res.get('avatar.avatar');
@@ -40,7 +40,6 @@ export class CommentComponent implements OnInit{
   postComment(){
     if(this.formComment.value.comment != '') {
       this.firestoreService.setComment(this.id, this.formComment.value.comment);
-      this.dialog.closeAll();
     } else{
       this.toastr.error("Comment can't have null value", "Enter your comment")
     }

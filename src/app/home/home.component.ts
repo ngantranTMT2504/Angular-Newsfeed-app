@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { CommentComponent } from './share/comment/comment.component';
 import { CreateNewsComponent } from './share/create-news/create-news.component';
 import { Firestore, collection, collectionData} from '@angular/fire/firestore'
+import { FirestoreService } from '../service/firestore.service';
 
 @Component({
   selector: 'app-home',
@@ -15,21 +16,31 @@ export class HomeComponent implements OnInit {
   formAddNews?: FormGroup;
   formComment?: FormGroup;
   avatarUrl: any;
-  userName = sessionStorage.getItem('userName') || '';
-  posts? : any
+  posts? : any;
+  disable = true;
   constructor(
     private store: AngularFirestore,
     private dialog: MatDialog,
-    private firestore : Firestore
+    private firestore : Firestore,
+    private service : FirestoreService,
   ) {
-    this.getAvatar(this.userName);
+    this.getAvatar(this.service.userName);
     this.getPost();
+    this.submit();
+    sessionStorage.removeItem('userName');
   }
   ngOnInit() {
     this.formAddNews = new FormGroup({
       status: new FormControl('', Validators.required)
     });
   }
+  submit(){
+    setTimeout(
+      () => {
+        this.disable = false;
+      }, 5000
+    )
+   }
   getAvatar(userName:string) {
     this.store.collection('users').doc(userName).get().subscribe((res) => {
       this.avatarUrl = res.get('avatar.avatar');

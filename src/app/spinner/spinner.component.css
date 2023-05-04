@@ -1,0 +1,6 @@
+.mat-mdc-progress-spinner {
+    --mdc-circular-progress-active-indicator-color: teal;
+}
+mat-spinner{
+    margin: 18% 45%;
+}
