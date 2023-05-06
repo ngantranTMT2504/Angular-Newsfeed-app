@@ -1,4 +1,4 @@
-import { Injectable, InjectionToken } from '@angular/core';
+import { InjectionToken } from '@angular/core';
 import * as CryptoJS from 'crypto-js';  
 
 export const EncryptDecryptServiceInstance = new InjectionToken<EncryptDecryptService>('encrypt passwork')
@@ -6,7 +6,6 @@ export class EncryptDecryptService {
   keyPassword = 'password'
 
   constructor() { }
-
   encrypt(password:string){
     return CryptoJS.AES.encrypt(password, this.keyPassword).toString();
   }

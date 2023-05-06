@@ -1,4 +1,4 @@
-import { Component, OnInit , Inject} from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -12,12 +12,14 @@ import { EncryptDecryptService, EncryptDecryptServiceInstance } from '../service
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
+  disable = false;
+  
   constructor(
     private toastr: ToastrService,
     private route: Router,
     private store: AngularFirestore,
-    @Inject(EncryptDecryptServiceInstance) private crypt : EncryptDecryptService
-  ) {};
+    @Inject(EncryptDecryptServiceInstance) private crypt: EncryptDecryptService
+  ) { };
   ngOnInit(): void {
     this.loginForm = new FormGroup({
       userName: new FormControl('', Validators.compose([Validators.required, Validators.minLength(5)])),
@@ -25,10 +27,13 @@ export class LoginComponent implements OnInit {
     })
   };
   login() {
+    this.disable = true;
     this.store.collection('users').doc(this.loginForm.value.userName).get().subscribe(res => {
       const password = res.get('info.password')
       if (this.crypt.decrypt(password) === this.loginForm.value.password) {
-        sessionStorage.setItem('userName', this.loginForm.value.userName)
+        this.disable = true;
+        sessionStorage.setItem('userName', this.loginForm.value.userName);
+        sessionStorage.setItem('isLogin', 'true')
         this.route.navigate(['home'])
       } else {
         this.toastr.error("Your account invalid");

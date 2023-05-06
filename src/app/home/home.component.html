@@ -1,4 +1,4 @@
-<app-spinner *ngIf="disable"></app-spinner>
+<mat-spinner [diameter]="70" *ngIf="disable"></mat-spinner>
 <div class="homePage" *ngIf="!disable">
     <div class="add-news">
         <mat-card class="add">
@@ -14,27 +14,27 @@
                 <div class="avatar-icon">
                     <img class="avt" [src]="post.creatorAvatar">
                     <div>
-                        <h4 class="userName">{{post.creatorName}}</h4>
+                        <p class="userName">{{post.creatorName}}</p>
                         <span class="time">{{(post.time | date:"short")}}</span>
                     </div>
                 </div>
-                <div id="news">
+                <div id="content">
                     <p>{{post.content}}</p>
-                    <img class="img-post" [src]="post.image" alt="">
+                    <img class="img-post" [src]="post.image" alt="" (click)="viewPicture(post.image)">
                 </div>
             </mat-card-content>
             <mat-card-actions>
-                <button mat-icon-button>
+                <button mat-icon-button (click)="likedNews()">
                     <mat-icon>favorite_border</mat-icon>
                 </button>
                 <button mat-icon-button (click)="openComment(post.id)">
                     <mat-icon>question_answer</mat-icon>
                 </button>
-                <button mat-icon-button>
+                <button mat-icon-button (click)="shareNews()">
                     <mat-icon>share</mat-icon>
                 </button>
             </mat-card-actions>
-        </mat-card> 
+        </mat-card>
     </div>
     <div class="friends">
         <app-friends></app-friends>

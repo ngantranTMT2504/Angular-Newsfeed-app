@@ -20,14 +20,16 @@
                         </mat-form-field>
                     </div>
                     <div class="btn">
-                        <button mat-raised-button class="btnlogin" type="submit">Log In</button><br>
-                        <a class="fp" href="" >Forgotten password?</a><hr>
+                        <button mat-raised-button class="btnlogin" type="submit">
+                            <mat-spinner [diameter]="36" *ngIf="disable"></mat-spinner>
+                            <span *ngIf="!disable">Log In</span>
+                        </button><br>
+                        <a class="fp">Forgotten password?</a>
+                        <hr>
                         <a mat-raised-button routerLink="/register">Create New Account</a>
                     </div>
                 </form>
             </mat-card-content>
         </mat-card>
     </div>
-
 </div>
-

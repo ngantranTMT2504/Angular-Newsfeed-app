@@ -15,7 +15,8 @@ export class SetAvatarComponent implements OnInit {
   selectImg: any;
   formAvatar!: FormGroup;
   userName = sessionStorage.getItem('userName') || '';
-  imgsrc: string = 'assets/images/avt-icon.png'
+  imgsrc: string = 'assets/images/avt-icon.png';
+  
   constructor(
     private storage: AngularFireStorage,
     private route: Router,

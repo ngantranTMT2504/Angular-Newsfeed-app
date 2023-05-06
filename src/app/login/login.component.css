@@ -14,6 +14,9 @@
     background-color:teal;
     color: white;
 }
+.mat-mdc-progress-spinner {
+    --mdc-circular-progress-active-indicator-color: snow;
+}
 .login{
     text-align: center;
     background-color: rgb(242, 246, 250);

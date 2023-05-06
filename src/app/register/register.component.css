@@ -23,6 +23,9 @@
     background-color: teal;
     color: white;
 }
+.mat-mdc-progress-spinner {
+    --mdc-circular-progress-active-indicator-color: snow;
+}
 mat-form-field{
     width: 100%;
 }

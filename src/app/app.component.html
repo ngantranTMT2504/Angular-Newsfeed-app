@@ -3,7 +3,7 @@
     <span>Newsfeed App</span>
     <span class="spacer"></span>
     <a mat-icon-button routerLink="/set-avatar"><i class="fa-solid fa-user-tie"></i></a>
-    <a mat-icon-button routerLink="/login"><i class="fa-solid fa-right-from-bracket"></i></a>
+    <button mat-icon-button (click)="backLoginPage()"><i class="fa-solid fa-right-from-bracket"></i></button>
   </mat-toolbar>
   <div class="router">
     <router-outlet></router-outlet>

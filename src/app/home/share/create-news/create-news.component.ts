@@ -16,7 +16,7 @@ export class CreateNewsComponent implements OnInit {
   imageUrl: any;
   selectImg: any;
   formStatus!: FormGroup;
-  
+
   constructor(
     private store: AngularFirestore,
     private storage: AngularFireStorage,

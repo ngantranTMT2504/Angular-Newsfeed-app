@@ -6,6 +6,8 @@ import { CommentComponent } from './share/comment/comment.component';
 import { CreateNewsComponent } from './share/create-news/create-news.component';
 import { Firestore, collection, collectionData} from '@angular/fire/firestore'
 import { FirestoreService } from '../service/firestore.service';
+import { ViewNewsPictureComponent } from '../view-news-picture/view-news-picture.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-home',
@@ -18,29 +20,22 @@ export class HomeComponent implements OnInit {
   avatarUrl: any;
   posts? : any;
   disable = true;
+  
   constructor(
     private store: AngularFirestore,
     private dialog: MatDialog,
     private firestore : Firestore,
     private service : FirestoreService,
+    private toastr : ToastrService
   ) {
     this.getAvatar(this.service.userName);
     this.getPost();
-    this.submit();
-    sessionStorage.removeItem('userName');
   }
   ngOnInit() {
     this.formAddNews = new FormGroup({
       status: new FormControl('', Validators.required)
     });
   }
-  submit(){
-    setTimeout(
-      () => {
-        this.disable = false;
-      }, 5000
-    )
-   }
   getAvatar(userName:string) {
     this.store.collection('users').doc(userName).get().subscribe((res) => {
       this.avatarUrl = res.get('avatar.avatar');
@@ -53,16 +48,31 @@ export class HomeComponent implements OnInit {
     const instancePost = collection( this.firestore, 'post');
     collectionData(instancePost,{idField: 'id'}).subscribe((res) => {
       this.posts = res;
+      this.disable = false;
       console.log(res)
     })
   }
   openComment(id: string){
-    const dialogRef =this.dialog.open(CommentComponent, {
+    const dialogRef = this.dialog.open(CommentComponent, {
       data: id
     })
     dialogRef.afterClosed().subscribe(result =>{
       result = id
     })
+  }
+  viewPicture(image: string){
+    const dialogRef = this.dialog.open(ViewNewsPictureComponent, {
+      data : image
+    })
+    dialogRef.afterClosed().subscribe(result =>{
+      result = image
+    })
+  }
+  shareNews(){
+    this.toastr.success('You just share this News!')
+  }
+  likedNews(){
+    this.toastr.success('You just like this News!')
   }
 }
 

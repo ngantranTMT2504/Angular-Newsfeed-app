@@ -25,7 +25,7 @@ import { provideFirebaseApp } from '@angular/fire/app';
 import { initializeApp } from 'firebase/app';
 import { FriendsComponent } from './home/share/friends/friends.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { SpinnerComponent } from './spinner/spinner.component';
+import { ViewNewsPictureComponent } from './view-news-picture/view-news-picture.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +38,7 @@ import { SpinnerComponent } from './spinner/spinner.component';
     CommentComponent,
     FriendsComponent,
     PageNotFoundComponent,
-    SpinnerComponent,
+    ViewNewsPictureComponent,
   ],
   imports: [
     BrowserModule,

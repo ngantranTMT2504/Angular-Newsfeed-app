@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 export class AppComponent implements DoCheck{
   title = 'NewsFeed';
   menu = false;
+  
   constructor(private route: Router) {};
   ngDoCheck(): void {
     let currentUrl = this.route.url;
@@ -18,5 +19,8 @@ export class AppComponent implements DoCheck{
       this.menu = false;
     }
   };
-  
+  backLoginPage(){
+    sessionStorage.clear()
+    this.route.navigate(['login'])
+  }
 }

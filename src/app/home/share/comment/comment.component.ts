@@ -15,6 +15,7 @@ export class CommentComponent implements OnInit{
   avatarUrl?: any;
   id?: string
   comments: any;
+  
   constructor(
     private store: AngularFirestore,
     private dialog: MatDialog,

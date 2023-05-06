@@ -1,6 +1,6 @@
 .comment{
     width: 40vw;
-    height: 90vh;
+    max-height: 80vh;
     padding: 1rem;
     font-size: 13px;
 }
@@ -27,7 +27,7 @@
 }
 .createCmt{
     display:flex;
-    position: fixed;
+    position:sticky;
     bottom: 10px;
     padding: 5px 0;
 }
@@ -40,10 +40,10 @@
     border: 1px solid black;
     border-radius: 6vh;
     margin-top: 2px;
-    padding-left: 12px;
+    padding-left:10px;
 }
 .createCmt button{
-    margin: 0 1rem;
+    margin: 0 1.5rem;
 }
 .createCmt mat-icon{
     color: teal;
