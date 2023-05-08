@@ -15,12 +15,12 @@
                     <img class="avt" [src]="post.creatorAvatar">
                     <div>
                         <p class="userName">{{post.creatorName}}</p>
-                        <span class="time">{{(post.time | date:"short")}}</span>
+                        <span class="time">{{(post.time | date: 'short')}}</span>
                     </div>
                 </div>
                 <div id="content">
                     <p>{{post.content}}</p>
-                    <img class="img-post" [src]="post.image" alt="" (click)="viewPicture(post.image)">
+                    <img *ngIf="post.image !== undefined" class="img-post" [src]="post.image" alt="" (click)="viewPicture(post.image)">
                 </div>
             </mat-card-content>
             <mat-card-actions>
