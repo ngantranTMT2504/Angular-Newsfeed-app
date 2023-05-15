@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { EncryptDecryptService, EncryptDecryptServiceInstance } from '../service/encrypt-decrypt.service';
+import { LoaderService } from '../service/loader.service';
 
 @Component({
   selector: 'app-register',
@@ -12,12 +13,12 @@ import { EncryptDecryptService, EncryptDecryptServiceInstance } from '../service
 })
 export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
-  disable = false;
   
   constructor(
     private toastr: ToastrService,
     private route: Router,
     private store: AngularFirestore,
+    public loader : LoaderService,
     @Inject(EncryptDecryptServiceInstance) private crypt : EncryptDecryptService
   ) { };
   ngOnInit(): void {
@@ -29,7 +30,7 @@ export class RegisterComponent implements OnInit {
     })
   };
   register() {
-    this.disable = true;
+    this.loader.setLoading(true);
     this.registerForm.value.password = this.crypt.encrypt(this.registerForm.value.password)
     if(this.registerForm.valid){
       this.store.collection('users').doc(this.registerForm.value.userName).set({

@@ -34,3 +34,14 @@
 mat-form-field{
     width: 100%;
 }
+@media(max-width: 960px){
+    .loginPage{
+        display: flex;
+        flex-direction: column;
+        width: 70%;
+        padding: 8% 15%;
+    }
+    .describe p{
+        font-size: 33px;
+    }
+}

@@ -38,8 +38,8 @@
                 </p>
                 <div class="btn">
                     <button mat-raised-button type="submit">
-                        <mat-spinner [diameter]="36" *ngIf="disable"></mat-spinner>
-                        <span *ngIf="!disable">Sign Up</span>
+                        <mat-spinner [diameter]="36" *ngIf="loader.getLoading()"></mat-spinner>
+                        <span *ngIf="!loader.getLoading()">Sign Up</span>
                     </button>
                     <hr>
                     <a mat-raised-button routerLink="/login">Back to Login</a>

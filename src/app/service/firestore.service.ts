@@ -2,15 +2,20 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { posts } from '../posts.models';
 import { Firestore,arrayUnion} from '@angular/fire/firestore'
-import { map } from 'rxjs/operators';
+import { finalize, map } from 'rxjs/operators';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FirestoreService {
   userName = sessionStorage.getItem('userName') || '';
-  
-  constructor(private store: AngularFirestore, private firestore : Firestore) { }
+  constructor(
+    private store: AngularFirestore,
+    private firestore : Firestore,
+    private storage: AngularFireStorage,
+  ) { }
+
   setPost(post?: posts["post"]) {
     this.store.collection('post').add(post);
   }
@@ -35,4 +40,37 @@ export class FirestoreService {
       })
     })
   }
+  postNews(status: HTMLTextAreaElement, selectImg: any) {
+    let post: {
+      "content": string,
+      "image": string,
+      "creatorName": string,
+      "creatorAvatar": string,
+      "time": number,
+      "comment": []
+    }
+    var filePath = `post:${this.userName}/${selectImg}_${new Date().getTime()}`;
+    const fileRef = this.storage.ref(filePath);
+    this.store.collection('users').doc(this.userName).get().subscribe((avt) => {
+      this.storage.upload(filePath, selectImg).snapshotChanges().pipe(
+        finalize(() => {
+          fileRef.getDownloadURL().subscribe((res) => {
+            post = {
+              "content": status.value,
+              "image": '',
+              "creatorName": this.userName,
+              "creatorAvatar": avt.get('avatar.avatar'),
+              "time": new Date().getTime(),
+              "comment": []
+            }
+            if(selectImg !== undefined){
+              post.image = res;
+            }
+            this.setPost(post)
+          })
+        })
+      ).subscribe(res => {console.log(res)})
+    })
+  }
+  
 }

@@ -8,25 +8,26 @@ import { Firestore, collection, collectionData} from '@angular/fire/firestore'
 import { FirestoreService } from '../service/firestore.service';
 import { ViewNewsPictureComponent } from '../view-news-picture/view-news-picture.component';
 import { ToastrService } from 'ngx-toastr';
+import { LoaderService } from '../service/loader.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
   formAddNews?: FormGroup;
   formComment?: FormGroup;
   avatarUrl: any;
   posts? : any;
-  disable = true;
   
   constructor(
     private store: AngularFirestore,
     private dialog: MatDialog,
     private firestore : Firestore,
     private service : FirestoreService,
-    private toastr : ToastrService
+    private toastr : ToastrService,
+    public loader : LoaderService
   ) {
     this.getAvatar(this.service.userName);
     this.getPost();
@@ -42,14 +43,14 @@ export class HomeComponent implements OnInit {
     })
   }
   createNews() {
-    this.dialog.open(CreateNewsComponent)
+    this.dialog.open(CreateNewsComponent);
   }
   getPost() {
     const instancePost = collection( this.firestore, 'post');
     collectionData(instancePost,{idField: 'id'}).subscribe((res) => {
-      this.posts = res;
-      this.disable = false;
-      console.log(res)
+      this.loader.setLoading(false)
+      this.posts = res.sort((a,b) => {return b['time'] - a['time']});
+      console.log(res);
     })
   }
   openComment(id: string){

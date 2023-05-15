@@ -15,6 +15,9 @@
         <button mat-icon-button class="btn-upload" (click)="uploadFile.click()">
                 <mat-icon>insert_photo</mat-icon>
         </button>
-        <button class="post"mat-raise-button (click)="postNews(status)">Post</button>
+        <button class="post"mat-raise-button (click)="postNews(status)">
+            <mat-spinner [diameter]="20" *ngIf="this.loader.getLoading()"></mat-spinner>
+            <span *ngIf="!this.loader.getLoading()">Post</span>
+        </button>
     </mat-card-content>
 </mat-card>

@@ -21,8 +21,8 @@
                     </div>
                     <div class="btn">
                         <button mat-raised-button class="btnlogin" type="submit">
-                            <mat-spinner [diameter]="36" *ngIf="disable"></mat-spinner>
-                            <span *ngIf="!disable">Log In</span>
+                            <mat-spinner [diameter]="30" *ngIf="loader.getLoading()"></mat-spinner>
+                            <span *ngIf="!loader.getLoading()">Log In</span>
                         </button><br>
                         <a class="fp">Forgotten password?</a>
                         <hr>

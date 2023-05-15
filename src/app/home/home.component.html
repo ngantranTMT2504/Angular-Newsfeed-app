@@ -1,5 +1,5 @@
-<mat-spinner [diameter]="70" *ngIf="disable"></mat-spinner>
-<div class="homePage" *ngIf="!disable">
+<!-- <mat-spinner [diameter]="70" *ngIf="loader.getLoading()"></mat-spinner> -->
+<div class="homePage">
     <div class="add-news">
         <mat-card class="add">
             <mat-card-content>
@@ -9,6 +9,7 @@
                 </form><br>
             </mat-card-content>
         </mat-card>
+        <mat-spinner [diameter]="40" *ngIf="loader.getLoading()"></mat-spinner>
         <mat-card class="news" *ngFor="let post of posts">
             <mat-card-content>
                 <div class="avatar-icon">
@@ -20,7 +21,7 @@
                 </div>
                 <div id="content">
                     <p>{{post.content}}</p>
-                    <img *ngIf="post.image !== undefined" class="img-post" [src]="post.image" alt="" (click)="viewPicture(post.image)">
+                    <img *ngIf="post.image?.length !== 0" class="img-post" [src]="post.image" alt="" (click)="viewPicture(post.image)">
                 </div>
             </mat-card-content>
             <mat-card-actions>
@@ -36,7 +37,7 @@
             </mat-card-actions>
         </mat-card>
     </div>
-    <div class="friends">
+    <!-- <div class="friends">
         <app-friends></app-friends>
-    </div>
+    </div> -->
 </div>

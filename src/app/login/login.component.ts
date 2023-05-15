@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { EncryptDecryptService, EncryptDecryptServiceInstance } from '../service/encrypt-decrypt.service';
+import { LoaderService } from '../service/loader.service';
 
 @Component({
   selector: 'app-login',
@@ -12,12 +13,12 @@ import { EncryptDecryptService, EncryptDecryptServiceInstance } from '../service
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
-  disable = false;
   
   constructor(
     private toastr: ToastrService,
     private route: Router,
     private store: AngularFirestore,
+    public loader: LoaderService,
     @Inject(EncryptDecryptServiceInstance) private crypt: EncryptDecryptService
   ) { };
   ngOnInit(): void {
@@ -27,11 +28,10 @@ export class LoginComponent implements OnInit {
     })
   };
   login() {
-    this.disable = true;
+    this.loader.setLoading(true)
     this.store.collection('users').doc(this.loginForm.value.userName).get().subscribe(res => {
       const password = res.get('info.password')
       if (this.crypt.decrypt(password) === this.loginForm.value.password) {
-        this.disable = true;
         sessionStorage.setItem('userName', this.loginForm.value.userName);
         sessionStorage.setItem('isLogin', 'true')
         this.route.navigate(['home'])
