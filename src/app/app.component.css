@@ -4,6 +4,9 @@
 [class^=fa]{
     font-size: 20px;
 }
+button{
+    margin: 0 10px;
+}
 mat-toolbar{
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
     background-color:teal;
@@ -12,6 +15,11 @@ mat-toolbar{
 }
 .menu span{
     font-size: 28px;
+}
+.notify span{
+    font-size: 1rem;
+    color: red;
+    margin-left: 3px;
 }
 .menu a{
     margin: 0 7px;

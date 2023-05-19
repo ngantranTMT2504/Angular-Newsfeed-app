@@ -20,10 +20,13 @@ export class CreateNewsComponent implements OnInit {
     private firestoreService: FirestoreService,
     private toastr: ToastrService,
     public loader : LoaderService
-  ) { }
+  ) {
+    this.loader.setLoading(true)
+   }
   ngOnInit(): void {
     this.formStatus = new FormGroup({
-      image: new FormControl('')
+      image: new FormControl(''),
+      status : new FormControl('')
     })
   }
   upload(event: any) {
@@ -38,9 +41,9 @@ export class CreateNewsComponent implements OnInit {
     }
   }
   postNews(status: HTMLTextAreaElement) {
+    this.loader.setLoading(false);
     this.firestoreService.postNews(status, this.selectImg);
     this.toastr.success('You posted 1 news!');
     this.dialog.closeAll();
-    this.loader.setLoading(true);
   }
 }

@@ -4,6 +4,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { FirestoreService } from 'src/app/service/firestore.service';
+import { LoaderService } from 'src/app/service/loader.service';
 
 @Component({
   selector: 'app-comment',
@@ -25,7 +26,7 @@ export class CommentComponent implements OnInit{
     ) {
     this.id = data
     this.getAvatar(this.firestoreService.userName);
-    this.getComment(this.id)
+    this.getComment(this.id);
   }
   ngOnInit(): void {
     this.formComment = new FormGroup({
@@ -41,6 +42,7 @@ export class CommentComponent implements OnInit{
   postComment(){
     if(this.formComment.value.comment != '') {
       this.firestoreService.setComment(this.id, this.formComment.value.comment);
+      this.getComment(this.id)
     } else{
       this.toastr.error("Comment can't have null value", "Enter your comment")
     }
@@ -48,7 +50,6 @@ export class CommentComponent implements OnInit{
   getComment(id:string){
     this.store.collection('post').doc(id).get().subscribe((res) =>{
       this.comments = res.get("comment")
-      console.log(this.comments)
     })
   }
 }

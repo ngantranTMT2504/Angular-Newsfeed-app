@@ -2,8 +2,14 @@
   <mat-toolbar class="menu" *ngIf="menu">
     <span>Newsfeed App</span>
     <span class="spacer"></span>
-    <a mat-icon-button routerLink="/set-avatar"><i class="fa-solid fa-user-tie"></i></a>
-    <button mat-icon-button (click)="backLoginPage()"><i class="fa-solid fa-right-from-bracket"></i></button>
+    <div>
+      <a mat-icon-button routerLink="/set-avatar"><i class="fa-solid fa-user-tie"></i></a>
+      <button mat-icon-button class="notify">
+        <i class="fa-regular fa-bell"></i>
+        <span>1</span>
+      </button>
+      <button mat-icon-button (click)="backLoginPage()"><i class="fa-solid fa-right-from-bracket"></i></button>
+    </div>
   </mat-toolbar>
   <div class="router">
     <router-outlet></router-outlet>

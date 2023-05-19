@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { EncryptDecryptService, EncryptDecryptServiceInstance } from '../service/encrypt-decrypt.service';
 import { LoaderService } from '../service/loader.service';
+import { UserInstance, UserService } from '../service/user.service';
 
 @Component({
   selector: 'app-login',
@@ -19,8 +20,11 @@ export class LoginComponent implements OnInit {
     private route: Router,
     private store: AngularFirestore,
     public loader: LoaderService,
-    @Inject(EncryptDecryptServiceInstance) private crypt: EncryptDecryptService
-  ) { };
+    @Inject(EncryptDecryptServiceInstance) private crypt: EncryptDecryptService,
+    @Inject(UserInstance) private user: UserService,
+  ) { 
+    this.loader.setLoading(true);
+  };
   ngOnInit(): void {
     this.loginForm = new FormGroup({
       userName: new FormControl('', Validators.compose([Validators.required, Validators.minLength(5)])),
@@ -28,17 +32,22 @@ export class LoginComponent implements OnInit {
     })
   };
   login() {
-    this.loader.setLoading(true)
+    this.loader.setLoading(false);
     this.store.collection('users').doc(this.loginForm.value.userName).get().subscribe(res => {
-      const password = res.get('info.password')
-      if (this.crypt.decrypt(password) === this.loginForm.value.password) {
-        sessionStorage.setItem('userName', this.loginForm.value.userName);
-        sessionStorage.setItem('isLogin', 'true')
-        this.route.navigate(['home'])
-      } else {
+      if(res !== undefined){
+        const password = res.get('info.password')
+        if (this.crypt.decrypt(password) === this.loginForm.value.password) {
+          sessionStorage.setItem('userName', this.loginForm.value.userName);
+          sessionStorage.setItem('isLogin', 'true');
+          this.route.navigate(['home'])
+        } else {
+          this.toastr.error("Your account invalid");
+          this.route.navigate(['/login'])
+        }
+      } else{
         this.toastr.error("Your account invalid");
         this.route.navigate(['/login'])
       }
-    });
+    })
   }
 }

@@ -26,6 +26,7 @@ import { initializeApp } from 'firebase/app';
 import { FriendsComponent } from './home/share/friends/friends.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ViewNewsPictureComponent } from './view-news-picture/view-news-picture.component';
+import { UserInstance, UserService } from './service/user.service';
 
 @NgModule({
   declarations: [
@@ -55,10 +56,15 @@ import { ViewNewsPictureComponent } from './view-news-picture/view-news-picture.
     AngularFirestoreModule,
     AngularFireStorageModule,
   ],
-  providers: [EncryptDecryptService,
+  providers: [
+    EncryptDecryptService,
     {
       provide:EncryptDecryptServiceInstance,
       useValue: new EncryptDecryptService(),
+    },
+    {
+      provide: UserInstance,
+      useValue : new UserService()
     }
     // {
     // provide: NewsFeedFunctionInstance,

@@ -5,7 +5,7 @@
     <mat-card-content align="end">
         <form (formGroup)="formStatus">
             <div>
-                <textarea #status placeholder="Write a sentence describing your photo"></textarea>
+                <textarea #status placeholder="Write a sentence describing your photo" formControlName="status"></textarea>
             </div>
             <div id="photo">
                 <img *ngIf="imageUrl" [src]="imageUrl" alt="image" id="preview-photo" >
@@ -16,8 +16,8 @@
                 <mat-icon>insert_photo</mat-icon>
         </button>
         <button class="post"mat-raise-button (click)="postNews(status)">
-            <mat-spinner [diameter]="20" *ngIf="this.loader.getLoading()"></mat-spinner>
-            <span *ngIf="!this.loader.getLoading()">Post</span>
+            <mat-spinner [diameter]="20" *ngIf="!this.loader.getLoading()"></mat-spinner>
+            <span *ngIf="this.loader.getLoading()">Post</span>
         </button>
     </mat-card-content>
 </mat-card>

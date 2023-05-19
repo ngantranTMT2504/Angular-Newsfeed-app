@@ -1,41 +1,46 @@
-<!-- <mat-spinner [diameter]="70" *ngIf="loader.getLoading()"></mat-spinner> -->
 <div class="homePage">
     <div class="add-news">
         <mat-card class="add">
             <mat-card-content>
-                <img *ngIf="avatarUrl" class="avt" [src]="avatarUrl" alt="avatar">
+                <img *ngIf="userInfo?.avatar" class="avt" [src]="userInfo?.avatar" alt="avatar">
                 <form>
                     <input matInput type="text" placeholder=" Hello! How is your day?" (click)="createNews()">
                 </form><br>
             </mat-card-content>
         </mat-card>
-        <mat-spinner [diameter]="40" *ngIf="loader.getLoading()"></mat-spinner>
-        <mat-card class="news" *ngFor="let post of posts">
-            <mat-card-content>
-                <div class="avatar-icon">
-                    <img class="avt" [src]="post.creatorAvatar">
-                    <div>
-                        <p class="userName">{{post.creatorName}}</p>
-                        <span class="time">{{(post.time | date: 'short')}}</span>
-                    </div>
-                </div>
-                <div id="content">
-                    <p>{{post.content}}</p>
-                    <img *ngIf="post.image?.length !== 0" class="img-post" [src]="post.image" alt="" (click)="viewPicture(post.image)">
-                </div>
-            </mat-card-content>
-            <mat-card-actions>
-                <button mat-icon-button (click)="likedNews()">
-                    <mat-icon>favorite_border</mat-icon>
-                </button>
-                <button mat-icon-button (click)="openComment(post.id)">
-                    <mat-icon>question_answer</mat-icon>
-                </button>
-                <button mat-icon-button (click)="shareNews()">
-                    <mat-icon>share</mat-icon>
-                </button>
-            </mat-card-actions>
+        <mat-card class="has-not-news" *ngIf="posts?.length == 0">
+            <h1>There aren't post yet.Be the first to post!</h1>
         </mat-card>
+        <mat-spinner [diameter]="70" *ngIf="loader.getLoading()"></mat-spinner>
+        <ng-container *ngFor="let post of posts">
+            <mat-card class="news" *ngIf="!loader.getLoading()">
+                <mat-card-content>
+                    <div class="avatar-icon">
+                        <img class="avt" [src]="post.creatorAvatar">
+                        <div>
+                            <p class="userName">{{post.creatorName}}</p>
+                            <span class="time">{{(post.time | date: 'short')}}</span>
+                        </div>
+                    </div>
+                    <div id="content">
+                        <p>{{post.content}}</p>
+                        <img *ngIf="post.image?.length !== 0" class="img-post" [src]="post.image" alt="" (click)="viewPicture(post.image)">
+                    </div>
+                </mat-card-content>
+                <mat-card-actions>
+                    <button mat-icon-button (click)="likedNews()">
+                        <mat-icon>favorite_border</mat-icon>
+                    </button>
+                    <button mat-icon-button (click)="openComment(post.id)">
+                        <mat-icon>question_answer</mat-icon>
+                    </button>
+                    <button mat-icon-button (click)="shareNews()">
+                        <mat-icon>share</mat-icon>
+                    </button>
+                </mat-card-actions>
+            </mat-card>
+            
+        </ng-container>
     </div>
     <!-- <div class="friends">
         <app-friends></app-friends>

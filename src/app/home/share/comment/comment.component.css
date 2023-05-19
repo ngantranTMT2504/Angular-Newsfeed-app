@@ -1,13 +1,19 @@
+mat-spinner{
+    margin: 10% 90%;
+}
+.mat-mdc-progress-spinner {
+    --mdc-circular-progress-active-indicator-color: teal;
+}
 .comment{
-    width: 40vw;
-    max-height: 80vh;
+    width: 40%;
+    max-height: 80%;
     padding: 1rem;
     font-size: 13px;
 }
 .card-comment{
     position: relative;
     display: flex;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
 }
 .avt{
     width:2.5rem; 
@@ -20,7 +26,7 @@
 }
 #cmt{
     display: block;
-    padding: 1px 1.2rem;
+    padding: 1px 10px;
     background-color: rgba(0, 0, 0, 0.162);
     border-bottom: 1px solid rgba(0, 0, 0, 0.37) ;
     border-radius: 1rem
@@ -35,8 +41,8 @@
     margin-right: 1.5rem;
 }
 .createCmt input{
-    width: 25vw;
-    height:2.8vw;
+    min-width: 90%;
+    height:65%;
     border: 1px solid black;
     border-radius: 6vh;
     margin-top: 2px;
@@ -47,4 +53,7 @@
 }
 .createCmt mat-icon{
     color: teal;
+}
+@media(max-width: 960px){
+
 }

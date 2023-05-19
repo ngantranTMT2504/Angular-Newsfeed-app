@@ -20,7 +20,9 @@ export class RegisterComponent implements OnInit {
     private store: AngularFirestore,
     public loader : LoaderService,
     @Inject(EncryptDecryptServiceInstance) private crypt : EncryptDecryptService
-  ) { };
+  ) {
+    this.loader.setLoading(true)
+   };
   ngOnInit(): void {
     this.registerForm = new FormGroup({
       userName: new FormControl('', Validators.compose([Validators.required, Validators.minLength(5)])),
@@ -30,7 +32,7 @@ export class RegisterComponent implements OnInit {
     })
   };
   register() {
-    this.loader.setLoading(true);
+    this.loader.setLoading(false);
     this.registerForm.value.password = this.crypt.encrypt(this.registerForm.value.password)
     if(this.registerForm.valid){
       this.store.collection('users').doc(this.registerForm.value.userName).set({
@@ -44,5 +46,6 @@ export class RegisterComponent implements OnInit {
       } else{
       this.toastr.error('You must inter information valid', 'Your information wrong');
     }
+    this.loader.setLoading(true)
   };
 }
