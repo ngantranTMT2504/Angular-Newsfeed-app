@@ -2,14 +2,23 @@
   <mat-toolbar class="menu" *ngIf="menu">
     <span>Newsfeed App</span>
     <span class="spacer"></span>
-    <div>
-      <a mat-icon-button routerLink="/set-avatar"><i class="fa-solid fa-user-tie"></i></a>
-      <button mat-icon-button class="notify">
-        <i class="fa-regular fa-bell"></i>
-        <span>1</span>
-      </button>
-      <button mat-icon-button (click)="backLoginPage()"><i class="fa-solid fa-right-from-bracket"></i></button>
+    <a mat-icon-button routerLink="/set-avatar"><i class="fa-solid fa-user-tie"></i></a>
+    <button mat-icon-button class="notify" (click)="unsetNotification()">
+      <i class="fa-regular fa-bell"></i>
+      <div>
+        <span *ngIf="counter !== 0">{{counter}}</span>
+      </div>
+    </button>
+    <div class="notifies" *ngIf="displayNotifies">
+      <p>There are {{counter}} new posts!</p>
+      <span class="close-display-notifies">
+        <button mat-icon-button (click)="closeNotifies()">
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </span>
+      <hr>
     </div>
+    <button mat-icon-button (click)="backLoginPage()"><i class="fa-solid fa-right-from-bracket"></i></button>
   </mat-toolbar>
   <div class="router">
     <router-outlet></router-outlet>

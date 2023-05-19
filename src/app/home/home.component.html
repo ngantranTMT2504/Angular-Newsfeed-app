@@ -11,7 +11,7 @@
         <mat-card class="has-not-news" *ngIf="posts?.length == 0">
             <h1>There aren't post yet.Be the first to post!</h1>
         </mat-card>
-        <mat-spinner [diameter]="70" *ngIf="loader.getLoading()"></mat-spinner>
+        <mat-spinner [diameter]="50" *ngIf="loader.getLoading()"></mat-spinner>
         <ng-container *ngFor="let post of posts">
             <mat-card class="news" *ngIf="!loader.getLoading()">
                 <mat-card-content>

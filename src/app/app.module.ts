@@ -16,7 +16,6 @@ import { AngularFirestoreModule} from "@angular/fire/compat/firestore";
 import { SetAvatarComponent } from './set-avatar/set-avatar.component';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { EncryptDecryptService, EncryptDecryptServiceInstance } from './service/encrypt-decrypt.service';
-import { NewsFeedFunction, NewsFeedFunctionInstance } from './service/news-feed-function.service';
 import { CreateNewsComponent } from './home/share/create-news/create-news.component';
 import { CommentComponent } from './home/share/comment/comment.component';
 import { provideFirestore } from '@angular/fire/firestore';
@@ -27,6 +26,7 @@ import { FriendsComponent } from './home/share/friends/friends.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ViewNewsPictureComponent } from './view-news-picture/view-news-picture.component';
 import { UserInstance, UserService } from './service/user.service';
+import { NotificationInstance, NotificationService } from './service/notification.service';
 
 @NgModule({
   declarations: [
@@ -65,11 +65,11 @@ import { UserInstance, UserService } from './service/user.service';
     {
       provide: UserInstance,
       useValue : new UserService()
+    },
+    {
+    provide: NotificationInstance,
+    useValue: new NotificationService(),
     }
-    // {
-    // provide: NewsFeedFunctionInstance,
-    // useValue: new NewsFeedFunction(),
-    // }
 ],
   bootstrap: [AppComponent]
 })

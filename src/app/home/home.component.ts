@@ -8,6 +8,7 @@ import { ViewNewsPictureComponent } from '../view-news-picture/view-news-picture
 import { ToastrService } from 'ngx-toastr';
 import { LoaderService } from '../service/loader.service';
 import { UserInstance, UserService } from '../service/user.service';
+import { NotificationInstance, NotificationService } from '../service/notification.service';
 
 @Component({
   selector: 'app-home',
@@ -19,13 +20,15 @@ export class HomeComponent implements OnInit {
   formComment?: FormGroup;
   posts?: any| [];
   userInfo?: any;
+  counter?:number;
   
   constructor(
     private dialog: MatDialog,
     private firestore: Firestore,
     private toastr: ToastrService,
     public loader: LoaderService,
-    @Inject(UserInstance) private user: UserService
+    @Inject(UserInstance) private user: UserService,
+    @Inject(NotificationInstance) private notify : NotificationService
   ) {
     this.loader.setLoading(true);
     this.getPost();

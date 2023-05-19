@@ -8,9 +8,9 @@ mat-spinner{
     text-align: center;
 }
 .homePage{
-    width: 70%;
+    max-width: 70vw;
     height: auto;
-    margin: 0 auto;
+    margin: 10px auto 0 auto;
 }
 .add-news{
     display: grid;
@@ -28,7 +28,7 @@ mat-spinner{
 }
 .add mat-card-content{
     display: flex;
-    margin: auto;
+    margin:  auto 0;
 }
 .add input{
     width: 50vw;
@@ -55,7 +55,6 @@ mat-spinner{
     font-weight: 500;
     padding: 0;
     margin: 0 10px 0 0;
-    font-weight: 500;
     font-size: 1rem;
 }
 #content{
@@ -112,7 +111,32 @@ mat-spinner{
 .createCmt mat-icon{
     color: teal;
 }
-.friends{
+/* .friends{
     position:-webkit-sticky;
     top: 0
+} */
+@media(max-width: 960px){
+    .img-post{
+        height: 50vh;
+    }
+    .avt{
+        width:2rem; 
+        height:2rem;
+    }
+    .add input{
+        width: 45vw;
+        height:30px;
+    }
+    .userName{
+        font-size: 0.8rem;
+    }
+    #content{
+        font-size: 0.7rem;
+    }
+    .time{
+        font-size: 0.6rem;
+    }
+    .news mat-icon{
+        font-size: 1rem;
+     }
 }

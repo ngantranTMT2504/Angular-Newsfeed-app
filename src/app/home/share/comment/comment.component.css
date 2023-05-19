@@ -5,8 +5,8 @@ mat-spinner{
     --mdc-circular-progress-active-indicator-color: teal;
 }
 .comment{
-    width: 40%;
-    max-height: 80%;
+    width: 40vw;
+    max-height: 80vh;
     padding: 1rem;
     font-size: 13px;
 }
@@ -41,8 +41,8 @@ mat-spinner{
     margin-right: 1.5rem;
 }
 .createCmt input{
-    min-width: 90%;
-    height:65%;
+    min-width: 50%;
+    height:5vh;
     border: 1px solid black;
     border-radius: 6vh;
     margin-top: 2px;
@@ -55,5 +55,19 @@ mat-spinner{
     color: teal;
 }
 @media(max-width: 960px){
-
+    .avt{
+        width:2rem; 
+        height:2rem;
+    }
+    .comment{
+        width: 80vw;
+        max-height: 80vh;
+        font-size: 0.7rem;
+    }
+    .createCmt img{
+        margin-right: 1rem;
+    }
+    .createCmt button{
+        margin: 0 1rem;
+    }
 }
