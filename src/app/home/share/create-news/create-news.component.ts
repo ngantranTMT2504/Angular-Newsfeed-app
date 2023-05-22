@@ -24,7 +24,7 @@ export class CreateNewsComponent implements OnInit {
     public loader : LoaderService,
     @Inject (NotificationInstance) private notify : NotificationService
   ) {
-    this.loader.setLoading(true)
+    this.loader.setLoading(true);
    }
   ngOnInit(): void {
     this.formStatus = new FormGroup({
@@ -47,8 +47,8 @@ export class CreateNewsComponent implements OnInit {
     this.counter = this.notify._getNotification() + 1;
     this.loader.setLoading(false);
     this.firestoreService.postNews(status, this.selectImg);
-    this.toastr.success('You posted 1 news!');
-    this.dialog.closeAll();
     this.notify._setNotification(this.counter);
+    // this.toastr.success('You posted 1 news!');
+    this.dialog.closeAll();
   }
 }

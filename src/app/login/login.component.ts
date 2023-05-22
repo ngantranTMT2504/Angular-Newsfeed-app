@@ -39,6 +39,9 @@ export class LoginComponent implements OnInit {
         if (this.crypt.decrypt(password) === this.loginForm.value.password) {
           sessionStorage.setItem('userName', this.loginForm.value.userName);
           sessionStorage.setItem('isLogin', 'true');
+          this.user._setUser({
+            
+          })
           this.route.navigate(['home'])
         } else {
           this.toastr.error("Your account invalid");

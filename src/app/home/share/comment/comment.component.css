@@ -5,7 +5,7 @@ mat-spinner{
     --mdc-circular-progress-active-indicator-color: teal;
 }
 .comment{
-    width: 40vw;
+    min-width: 40vw;
     max-height: 80vh;
     padding: 1rem;
     font-size: 13px;
@@ -41,7 +41,7 @@ mat-spinner{
     margin-right: 1.5rem;
 }
 .createCmt input{
-    min-width: 50%;
+    min-width: 40vw;
     height:5vh;
     border: 1px solid black;
     border-radius: 6vh;

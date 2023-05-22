@@ -30,8 +30,8 @@ export class HomeComponent implements OnInit {
     @Inject(UserInstance) private user: UserService,
     @Inject(NotificationInstance) private notify : NotificationService
   ) {
-    this.loader.setLoading(true);
     this.getPost();
+    this.loader.setLoading(true);
   }
   ngOnInit() {
     this.formAddNews = new FormGroup({

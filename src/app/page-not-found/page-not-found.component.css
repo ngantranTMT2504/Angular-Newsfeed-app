@@ -19,3 +19,14 @@
     background-color: teal;
     color: white;
 }
+@media(max-width:960px){
+    .mainPage{
+        padding: 20% auto;
+    }
+    .mainPage h1{
+        font-size: 3rem;
+    }
+    .mainPage h3{
+        font-size: 1.5rem;
+    }
+}

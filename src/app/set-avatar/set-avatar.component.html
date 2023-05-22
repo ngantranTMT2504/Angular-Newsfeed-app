@@ -7,7 +7,12 @@
         <form (formGroup)="formAvatar">
             <input id="input-avatar" formControlName="avatar" #fileUpload type="file" (change)="upload($event)"><br>
         </form>
-        <button mat-raised-button type="submit" (click)="uploadImg()">update</button>
+        <p>
+            <button mat-raised-button type="submit" (click)="uploadImg()">update</button>
+        </p>
+        <p>
+            <a mat-raised-button routerLink="/home">Back to Home</a>
+        </p>
     </div>
 </div>
     

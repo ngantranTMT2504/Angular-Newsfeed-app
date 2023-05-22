@@ -20,10 +20,11 @@ export class AppComponent implements DoCheck, OnInit{
     private store: AngularFirestore,
     @Inject(UserInstance) private user: UserService,
     @Inject(NotificationInstance) private notify : NotificationService
-  ) {};
+  ) {
+    this.getInfoUser();
+  };
 
   ngOnInit(): void {
-    this.getInfoUser();
     this.notify._getNotificationAsObserverble().subscribe(res => {
       this.counter = res;
       console.log('counter: '+this.counter)
@@ -55,10 +56,12 @@ export class AppComponent implements DoCheck, OnInit{
 
   unsetNotification(){
     this.displayNotifies = true;
-    this.notify._setNotification(0);
   };
-
+  
   closeNotifies(){
     this.displayNotifies = false;
+    setTimeout(() => {
+      this.notify._setNotification(0);
+    }, 1000);
   };
 }

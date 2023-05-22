@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, Injector, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore'
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { finalize } from 'rxjs';
+import { UserInstance, UserService } from '../service/user.service';
 
 @Component({
   selector: 'app-set-avatar',
@@ -16,13 +17,14 @@ export class SetAvatarComponent implements OnInit {
   formAvatar!: FormGroup;
   userName = sessionStorage.getItem('userName') || '';
   imgsrc: string = 'assets/images/avt-icon.png';
-  
+
   constructor(
     private storage: AngularFireStorage,
     private route: Router,
     private store: AngularFirestore,
-    private toastr : ToastrService
-  ) {}
+    private toastr: ToastrService,
+    @Inject(UserInstance) private user: UserService,
+  ) { }
   ngOnInit() {
     this.formAvatar = new FormGroup({
       avatar: new FormControl(null)
@@ -49,6 +51,10 @@ export class SetAvatarComponent implements OnInit {
           this.store.collection('users').doc(this.userName).update({
             avatar: this.formAvatar.value
           });
+          this.user._setUser({
+            'userName': this.userName,
+            'avatar': this.formAvatar.value.avatar,
+          })
         })
       })
     ).subscribe();

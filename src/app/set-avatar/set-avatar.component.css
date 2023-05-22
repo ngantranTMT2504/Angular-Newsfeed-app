@@ -21,7 +21,7 @@
     z-index: 2;
     text-align: center;
     right: 10px;
-    bottom: 200px;
+    bottom: 250px;
     background-color: rgba(88, 87, 87, 0.4);
 }
 #input-avatar{
@@ -30,4 +30,15 @@
 .mat-mdc-raised-button:not(:disabled){
     background-color: teal;
     color: white;
+}
+@media(max-width: 960px){
+    .avatar-container{
+        margin:0 20%;
+        padding: 10% 0;
+    }
+    #btn-change-avt{
+        text-align: 1rem;
+        right: 8px;
+        bottom: 170px;
+    }
 }
