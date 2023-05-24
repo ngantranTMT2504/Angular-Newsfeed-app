@@ -21,6 +21,7 @@ export class HomeComponent implements OnInit {
   posts?: any| [];
   userInfo?: any;
   counter?:number;
+  disable : boolean = true;
   
   constructor(
     private dialog: MatDialog,
@@ -31,7 +32,6 @@ export class HomeComponent implements OnInit {
     @Inject(NotificationInstance) private notify : NotificationService
   ) {
     this.getPost();
-    this.loader.setLoading(true);
   }
   ngOnInit() {
     this.formAddNews = new FormGroup({
@@ -47,11 +47,11 @@ export class HomeComponent implements OnInit {
     this.dialog.open(CreateNewsComponent);
   }
   getPost() {
+    this.disable = false;
     const instancePost = collection(this.firestore, 'post');
     collectionData(instancePost, { idField: 'id' }).subscribe((res) => {
       this.posts = res.sort((a, b) => { return b['time'] - a['time'] });
       console.log(res);
-      this.loader.setLoading(false);
     })
   }
   openComment(id: string) {

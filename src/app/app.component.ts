@@ -46,12 +46,14 @@ export class AppComponent implements DoCheck, OnInit{
   };
 
   getInfoUser(){
-    this.store.collection('users').doc(sessionStorage.getItem('userName')).get().subscribe(res => {
-      this.user._setUser({
-        'userName': sessionStorage.getItem('userName'),
-        'avatar': res?.get('avatar.avatar'),
+    if(sessionStorage.getItem('isLogin') == 'true'){
+      this.store.collection('users').doc(sessionStorage.getItem('userName')).get().subscribe(res => {
+        this.user._setUser({
+          'userName': sessionStorage.getItem('userName'),
+          'avatar': res?.get('avatar.avatar'),
+        })
       })
-    })
+    }
   };
 
   unsetNotification(){

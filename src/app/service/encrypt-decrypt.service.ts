@@ -3,7 +3,7 @@ import * as CryptoJS from 'crypto-js';
 
 export const EncryptDecryptServiceInstance = new InjectionToken<EncryptDecryptService>('encrypt passwork')
 export class EncryptDecryptService {
-  keyPassword = 'password'
+  keyPassword:string = 'password';
 
   constructor() { }
   encrypt(password:string){

@@ -14,7 +14,7 @@ import { UserInstance, UserService } from '../service/user.service';
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
-  
+
   constructor(
     private toastr: ToastrService,
     private route: Router,
@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
     public loader: LoaderService,
     @Inject(EncryptDecryptServiceInstance) private crypt: EncryptDecryptService,
     @Inject(UserInstance) private user: UserService,
-  ) { 
+  ) {
     this.loader.setLoading(true);
   };
   ngOnInit(): void {
@@ -34,20 +34,21 @@ export class LoginComponent implements OnInit {
   login() {
     this.loader.setLoading(false);
     this.store.collection('users').doc(this.loginForm.value.userName).get().subscribe(res => {
-      if(res !== undefined){
+      if (res !== undefined) {
         const password = res.get('info.password')
         if (this.crypt.decrypt(password) === this.loginForm.value.password) {
           sessionStorage.setItem('userName', this.loginForm.value.userName);
           sessionStorage.setItem('isLogin', 'true');
           this.user._setUser({
-            
+            'userName': this.loginForm.value.userName,
+            'avatar': res?.get('avatar.avatar'),
           })
           this.route.navigate(['home'])
         } else {
           this.toastr.error("Your account invalid");
           this.route.navigate(['/login'])
         }
-      } else{
+      } else {
         this.toastr.error("Your account invalid");
         this.route.navigate(['/login'])
       }
